@@ -16,7 +16,9 @@ CVEs: (CVE-2018-20250) (CVE-2018-20251) (CVE-2018-20252) (CVE-2018-20253)
 # Usage: 
 
  PS E:\Pruebas C# PowerShell> .\DetectWinRARaceVulnDomain.ps1
+ 
  or
+ 
  PS C:\prueba> powershell.exe -ExecutionPolicy Bypass -File 'E:\Pruebas C# PowerShell\DetectWinRARaceVulnDomain.ps1'
  
  You can try differents methods.
