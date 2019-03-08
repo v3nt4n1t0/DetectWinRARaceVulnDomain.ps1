@@ -82,6 +82,6 @@ Write-Host "`nPara solucionar la vulnerabilidad ACTUALIZA a WinRAR 5.70 o superi
 Write-Host "To fix the vulnerability UPDATE WinRAR to 5.70 or higher"
 }
 else{
-Write-Host -ForegroundColor Red "Son necesarias las credenciales de Administrador para ejecutar el script"
-Write-Host -ForegroundColor Red "Administrator credentials are required to run the script"
+Write-Host -ForegroundColor Red -BackgroundColor Yellow "Son necesarias las credenciales de Administrador para ejecutar el script"
+Write-Host -ForegroundColor Red -BackgroundColor Yellow "Administrator credentials are required to run the script"
 }
