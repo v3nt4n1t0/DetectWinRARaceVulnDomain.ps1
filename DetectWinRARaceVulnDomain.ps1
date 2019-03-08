@@ -1,4 +1,4 @@
-﻿#
+#
 # This software is provided under under the BSD 3-Clause License.
 # See the accompanying LICENSE file for more information.
 #
@@ -8,7 +8,6 @@
 #
 # Description: Script in PowerShell to detect vulnerable versions of WinRAR (related to ACE files) in a Windows domain. 
 #
-#
 # CVEs: (CVE-2018-20250) (CVE-2018-20251) (CVE-2018-20252) (CVE-2018-20253)
 # 
 # 
@@ -17,7 +16,6 @@
 # - Well configured WinRM on remote machines
 # - Well configured firewall rules
 # - Run the script with the Unrestricted or Bypass execution policies from Domain Controller
-#
 #
 # Usage: 
 #
