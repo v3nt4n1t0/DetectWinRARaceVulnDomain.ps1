@@ -1,5 +1,5 @@
 #
-# This software is provided under under the BSD 3-Clause License.
+# This software is provided under the BSD 3-Clause License.
 # See the accompanying LICENSE file for more information.
 #
 # Author: Roberto Berrio (@v3nt4n1t0)
