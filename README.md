@@ -21,6 +21,6 @@ CVEs: (CVE-2018-20250) (CVE-2018-20251) (CVE-2018-20252) (CVE-2018-20253)
  
  ## Output:
 
-https://raw.githubusercontent.com/v3nt4n1t0/DetectWinRARaceVulnDomain.ps1/master/1.PNG
+![](https://raw.githubusercontent.com/v3nt4n1t0/DetectWinRARaceVulnDomain.ps1/master/1.PNG)
 
-https://raw.githubusercontent.com/v3nt4n1t0/DetectWinRARaceVulnDomain.ps1/master/2.PNG
+![](https://raw.githubusercontent.com/v3nt4n1t0/DetectWinRARaceVulnDomain.ps1/master/2.PNG)
