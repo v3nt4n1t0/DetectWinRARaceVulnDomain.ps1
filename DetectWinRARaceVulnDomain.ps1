@@ -36,7 +36,6 @@ foreach ($cname in $c.name ) {
     if(test-connection -ComputerName $cname -Count 1 -Quiet){
         try{
         $session = New-PSSession -ComputerName $cname -Credential $cred
-        #if($session){
         Invoke-Command -Session $session -ScriptBlock{
             $machine = (Get-WmiObject -class win32_NetworkAdapterConfiguration -Filter 'ipenabled = "true"').ipaddress[0] + "," +[Environment]::GetEnvironmentVariable("ComputerName") 
             ls HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall | ForEach-Object -Process {      
@@ -66,12 +65,11 @@ foreach ($cname in $c.name ) {
         }#ScriptBlock
     
         Remove-PSSession -Session $session
-        #}else{ Write-Host -ForegroundColor Red "Debe introducir correctamente las credenciales de Administrador"}
+        
         }catch{
         Write-Host -ForegroundColor Red -BackgroundColor Yellow "$cname esta activa, pero no se puede realizar la comprobación. Compruebe que las credenciales de Administrador sean correctas, que el equipo remoto tiene activo WinRM o que ninguna regla del Firewall esté bloqueando la conexión"
         Write-Host -ForegroundColor Red -BackgroundColor Yellow "$cname is active, but the check can not be performed. Verify that the Administrator credentials are correct, that the remote computer has WinRM actived, or that Firewall rules are not blocking the connection"
         }
-
     }
     else{ 
     Write-Host -ForegroundColor DarkYellow "$cname No responde a ping o esta apagada. Compruebe que ninguna regla del Firewall este bloqueando la conexión."
@@ -85,8 +83,6 @@ Write-Host "`nPara solucionar la vulnerabilidad ACTUALIZA a WinRAR 5.70 o superi
 Write-Host "To fix the vulnerability UPDATE WinRAR to 5.70 or higher"
 }
 else{
-
 Write-Host -ForegroundColor Red "Son necesarias las credenciales de Administrador para ejecutar el script"
 Write-Host -ForegroundColor Red "Administrator credentials are required to run the script"
-
 }
