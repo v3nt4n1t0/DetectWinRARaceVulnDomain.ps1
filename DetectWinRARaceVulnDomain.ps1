@@ -38,8 +38,7 @@ foreach ($cname in $c.name ) {
         $session = New-PSSession -ComputerName $cname -Credential $cred
         Invoke-Command -Session $session -ScriptBlock{
             $machine = (Get-WmiObject -class win32_NetworkAdapterConfiguration -Filter 'ipenabled = "true"').ipaddress[0] + "," +[Environment]::GetEnvironmentVariable("ComputerName") 
-            ls HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall | ForEach-Object -Process {      
-            
+            ls HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall | ForEach-Object -Process {
                 if($_.GetValue("DisplayName") -like "winrar*"){
                 $winrar = $_.GetValue("DisplayName")
                 $winrarSplit = $winrar.Split(" ")
