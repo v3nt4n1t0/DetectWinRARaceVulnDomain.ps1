@@ -28,7 +28,7 @@
 
 $c = Get-ADComputer -Properties IPv4Address -Filter {Enabled -eq $true}
 $cred = Get-Credential
-#$vuln = 0
+
 echo ""
 if($cred){
 foreach ($cname in $c.name ) {
@@ -58,10 +58,9 @@ foreach ($cname in $c.name ) {
         if(!$winrar){"$machine -> No contiene WinRAR"}
         elseif($versionWinRAR -lt 5.70){
         Write-Host -ForegroundColor Red "$machine -> Vulnerable!"
-        #$vuln = $vuln+1
         }
-        else{"$machine -> No es vulnerable"}
-        }#ScriptBlock
+        else{"$machine -> No vulnerable"}
+        }
     
         Remove-PSSession -Session $session
         
@@ -74,9 +73,7 @@ foreach ($cname in $c.name ) {
     Write-Host -ForegroundColor DarkYellow "$cname No responde a ping o esta apagada. Compruebe que ninguna regla del Firewall este bloqueando la conexión."
     Write-Host -ForegroundColor DarkYellow "$cname does not respond to ping or the machine is off. Check that firewall rules are not blocking the connection"
     }
-}#foreach
-
-#echo "`n $vuln máquinas vulnerables"
+}
 
 Write-Host "`nPara solucionar la vulnerabilidad ACTUALIZA a WinRAR 5.70 o superior"
 Write-Host "To fix the vulnerability UPDATE WinRAR to 5.70 or higher"
