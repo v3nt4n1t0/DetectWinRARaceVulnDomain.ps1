@@ -31,54 +31,44 @@ $cred = Get-Credential
 
 echo ""
 if($cred){
-foreach ($cname in $c.name ) {
+    foreach ($cname in $c.name ) {
     
-    if(test-connection -ComputerName $cname -Count 1 -Quiet){
-        try{
-        $session = New-PSSession -ComputerName $cname -Credential $cred
-        Invoke-Command -Session $session -ScriptBlock{
-            $machine = (Get-WmiObject -class win32_NetworkAdapterConfiguration -Filter 'ipenabled = "true"').ipaddress[0] + "," +[Environment]::GetEnvironmentVariable("ComputerName") 
-            ls HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall | ForEach-Object -Process {
-                if($_.GetValue("DisplayName") -like "winrar*"){
-                $winrar = $_.GetValue("DisplayName")
-                $winrarSplit = $winrar.Split(" ")
-                $versionWinRAR = $winrarSplit[1]
+        if(test-connection -ComputerName $cname -Count 1 -Quiet){
+            try{
+            $session = New-PSSession -ComputerName $cname -Credential $cred
+            Invoke-Command -Session $session -ScriptBlock{
+                $machine = (Get-WmiObject -class win32_NetworkAdapterConfiguration -Filter 'ipenabled = "true"').ipaddress[0] + "," +[Environment]::GetEnvironmentVariable("ComputerName") 
+            
+                ls HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall | ForEach-Object -Process {      
+            
+                    if($_.GetValue("DisplayName") -like "winrar*"){
+                    $winrar = $_.GetValue("DisplayName")
+                    $winrarSplit = $winrar.Split(" ")
+                    $versionWinRAR = $winrarSplit[1]
+                    }
                 }
-                else{
+
                 ls HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall | ForEach-Object -Process {
                         if($_.GetValue("DisplayName") -like "winrar*"){
                         $winrar = $_.GetValue("DisplayName")
                         $winrarSplit = $winrar.Split(" ")
                         $versionWinRAR = $winrarSplit[1]
                         }
-                    }
                 }
+     
+            if(!$winrar){"$machine -> No contiene WinRAR"}
+            elseif($versionWinRAR -lt 5.70){Write-Host -ForegroundColor Red "$machine -> Vulnerable!"}
+            else{"$machine -> No es vulnerable"}
             }
-
-        if(!$winrar){"$machine -> No contiene WinRAR"}
-        elseif($versionWinRAR -lt 5.70){
-        Write-Host -ForegroundColor Red "$machine -> Vulnerable!"
-        }
-        else{"$machine -> No vulnerable"}
-        }
     
-        Remove-PSSession -Session $session
-        
-        }catch{
-        Write-Host -ForegroundColor Red -BackgroundColor Yellow "$cname esta activa, pero no se puede realizar la comprobación. Compruebe que las credenciales de Administrador sean correctas, que el equipo remoto tiene activo WinRM o que ninguna regla del Firewall esté bloqueando la conexión"
-        Write-Host -ForegroundColor Red -BackgroundColor Yellow "$cname is active, but the check can not be performed. Verify that the Administrator credentials are correct, that the remote computer has WinRM actived, or that Firewall rules are not blocking the connection"
-        }
-    }
-    else{ 
-    Write-Host -ForegroundColor DarkYellow "$cname No responde a ping o esta apagada. Compruebe que ninguna regla del Firewall este bloqueando la conexión."
-    Write-Host -ForegroundColor DarkYellow "$cname does not respond to ping or the machine is off. Check that firewall rules are not blocking the connection"
-    }
-}
+            Remove-PSSession -Session $session
 
-Write-Host "`nPara solucionar la vulnerabilidad ACTUALIZA a WinRAR 5.70 o superior"
-Write-Host "To fix the vulnerability UPDATE WinRAR to 5.70 or higher"
+            }catch{Write-Host -ForegroundColor Red -BackgroundColor Yellow "$cname is active, but the check can not be performed. Verify that the Administrator credentials are correct, that the remote computer has WinRM actived, or that Firewall rules are not blocking the connection"}
+        }
+        else{Write-Host -ForegroundColor DarkYellow "$cname does not respond to ping or the machine is off. Check that firewall rules are not blocking the connection"}
+    }
+
+Write-Host "To fix the vulnerability UPDATE WinRAR to 5.70 or higher`n"
+
 }
-else{
-Write-Host -ForegroundColor Red -BackgroundColor Yellow "Son necesarias las credenciales de Administrador para ejecutar el script"
-Write-Host -ForegroundColor Red -BackgroundColor Yellow "Administrator credentials are required to run the script"
-}
+else{Write-Host -ForegroundColor Red -BackgroundColor Yellow "Administrator credentials are required to run the script`n"}
