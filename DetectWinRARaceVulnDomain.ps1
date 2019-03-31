@@ -56,9 +56,9 @@ if($cred){
                         }
                 }
      
-            if(!$winrar){"$machine -> No contiene WinRAR"}
+            if(!$winrar){"$machine -> Does not contain WinRAR"}
             elseif($versionWinRAR -lt 5.70){Write-Host -ForegroundColor Red "$machine -> Vulnerable!"}
-            else{"$machine -> No es vulnerable"}
+            else{"$machine -> Non-vulnerable"}
             }
     
             Remove-PSSession -Session $session
