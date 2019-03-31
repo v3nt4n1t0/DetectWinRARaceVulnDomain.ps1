@@ -68,7 +68,7 @@ if($cred){
         else{Write-Host -ForegroundColor DarkYellow "$cname does not respond to ping or the machine is off. Check that firewall rules are not blocking the connection"}
     }
 
-Write-Host "To fix the vulnerability UPDATE WinRAR to 5.70 or higher`n"
+Write-Host "`n To fix the vulnerability UPDATE WinRAR to 5.70 or higher`n"
 
 }
-else{Write-Host -ForegroundColor Red -BackgroundColor Yellow "Administrator credentials are required to run the script`n"}
+else{Write-Host -ForegroundColor Red -BackgroundColor Yellow "`n Administrator credentials are required to run the script`n"}
