@@ -8,9 +8,9 @@ CVEs: (CVE-2018-20250) (CVE-2018-20251) (CVE-2018-20252) (CVE-2018-20253)
 
 ### Considerations:
 
-- Well configured WinRM on remote machines
-- Well configured firewall rules
-- Run the script with the Unrestricted or Bypass execution policies from Domain Controller
+- Well configured WinRM on remote machines.
+- Well configured firewall rules. Allow ping to remote machines from the Domain Controller.
+- Run the script with the Unrestricted or Bypass execution policies from Domain Controller.
 
 
 # Usage: 
