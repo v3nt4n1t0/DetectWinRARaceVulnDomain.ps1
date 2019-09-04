@@ -12,8 +12,7 @@
         - Well configured WinRM on remote machines
         - Well configured firewall rules
         - Run the script with the Unrestricted or Bypass execution policies from Domain Controller
-    
-    
+        
 .NOTES
     File Name      : DetectWinRARaceVulnDomain.ps1
     Author         : Author: Roberto Berrio (@v3nt4n1t0)
