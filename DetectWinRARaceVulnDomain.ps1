@@ -1,30 +1,39 @@
-#
-# This software is provided under the BSD 3-Clause License.
-# See the accompanying LICENSE file for more information.
-#
-# Author: Roberto Berrio (@v3nt4n1t0)
-# Website: https://github.com/v3nt4n1t0
-#
-#
-# Description: Script in PowerShell to detect vulnerable versions of WinRAR (related to ACE files) in a Windows domain. 
-#
-# CVEs: (CVE-2018-20250) (CVE-2018-20251) (CVE-2018-20252) (CVE-2018-20253)
-# 
-# 
-# Considerations: 
-#
-# - Well configured WinRM on remote machines
-# - Well configured firewall rules
-# - Run the script with the Unrestricted or Bypass execution policies from Domain Controller
-#
-# Usage: 
-#
-# PS E:\Pruebas C# PowerShell> .\DetectWinRARaceVulnDomain.ps1
-#
-# PS C:\prueba> powershell.exe -ExecutionPolicy Bypass -File 'E:\Pruebas C# PowerShell\DetectWinRARaceVulnDomain.ps1'
-# 
-################################################################################################################################################## 
+<#
+.SYNOPSIS
+    WinRAR ACE vulnerability scanner for Domain
+    
+.DESCRIPTION
+    Script in PowerShell to detect vulnerable versions of WinRAR (related to ACE files) in a Windows domain.
 
+    CVEs: (CVE-2018-20250) (CVE-2018-20251) (CVE-2018-20252) (CVE-2018-20253)
+    
+    
+    Considerations: 
+        - Well configured WinRM on remote machines
+        - Well configured firewall rules
+        - Run the script with the Unrestricted or Bypass execution policies from Domain Controller
+    
+    
+.NOTES
+    File Name      : DetectWinRARaceVulnDomain.ps1
+    Author         : Author: Roberto Berrio (@v3nt4n1t0)
+    Website        : https://github.com/v3nt4n1t0
+
+    This software is provided under the BSD 3-Clause License.
+    See the accompanying LICENSE file for more information.
+    
+.LINK
+    https://github.com/v3nt4n1t0/DetectWinRARaceVulnDomain.ps1
+    
+.EXAMPLE
+    .\DetectWinRARaceVulnDomain.ps1
+    
+.EXAMPLE
+    powershell.exe -ExecutionPolicy Bypass -File 'E:\Pruebas C# PowerShell\DetectWinRARaceVulnDomain.ps1'
+    
+.EXAMPLE
+    iex(New-Object Net.WebClient).DownloadString("https://raw.githubusercontent.com/v3nt4n1t0/DetectWinRARaceVulnDomain.ps1/master/DetectWinRARaceVulnDomain.ps1")
+#>
 
 $c = Get-ADComputer -Properties IPv4Address -Filter {Enabled -eq $true}
 $cred = Get-Credential
